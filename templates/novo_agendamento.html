@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo agendamento | Projeto Vértice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Projeto Vértice</h1>
+        <p>Organização simples para o seu negócio.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Novo agendamento</h2>
+            <p>Preencha os dados para organizar o próximo atendimento.</p>
+
+            <form action="{{ url_for('novo_agendamento') }}" method="POST">
+                <div class="campo">
+                    <label for="cliente">Nome do cliente</label>
+                    <input
+                        type="text"
+                        id="cliente"
+                        name="cliente"
+                        placeholder="Ex.: Marina Oliveira"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="servico">Serviço ou procedimento</label>
+                    <input
+                        type="text"
+                        id="servico"
+                        name="servico"
+                        placeholder="Ex.: Corte de cabelo"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="data">Data do atendimento</label>
+                    <input
+                        type="date"
+                        id="data"
+                        name="data"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="horario">Horário</label>
+                    <input
+                        type="time"
+                        id="horario"
+                        name="horario"
+                        required
+                    >
+                </div>
+
+                <div class="acoes-formulario">
+                    <button type="submit">Salvar agendamento</button>
+                    <a href="{{ url_for('inicio') }}" class="botao-voltar">
+                        Voltar ao menu
+                    </a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Projeto Vértice — MVP em desenvolvimento</p>
+    </footer>
+</body>
+</html>

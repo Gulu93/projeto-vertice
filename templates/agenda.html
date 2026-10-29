@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda | Projeto Vértice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Projeto Vértice</h1>
+        <p>Organização simples para o seu negócio.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Agenda de atendimentos</h2>
+            <p>Confira os agendamentos registrados no sistema.</p>
+
+            {% if agendamentos %}
+                <div class="lista-agendamentos">
+                    {% for agendamento in agendamentos %}
+                        <article class="item-agendamento">
+                            <h3>{{ agendamento['cliente'] }}</h3>
+                            <p>
+                                <strong>Serviço:</strong>
+                                {{ agendamento['servico'] }}
+                            </p>
+                            <p>
+                                <strong>Data:</strong>
+                                {{ agendamento['data'] }}
+                            </p>
+                            <p>
+                                <strong>Horário:</strong>
+                                {{ agendamento['horario'] }}
+                            </p>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Nenhum agendamento cadastrado até o momento.</p>
+            {% endif %}
+
+            <div class="acoes-formulario">
+                <a href="{{ url_for('novo_agendamento') }}"
+                   class="botao-agendamento">
+                    + Novo agendamento
+                </a>
+
+                <a href="{{ url_for('inicio') }}" class="botao-voltar">
+                    Voltar ao menu
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Projeto Vértice — MVP em desenvolvimento</p>
+    </footer>
+</body>
+</html>

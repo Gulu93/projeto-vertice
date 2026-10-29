@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Vértice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Projeto Vértice</h1>
+        <p>Organização simples para o seu negócio.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Bem-vindo(a) ao seu espaço de gestão!</h2>
+            <p>Organize seus agendamentos e acompanhe a rotina do salão.</p>
+        </section>
+
+        <section>
+            <h2>O que você deseja fazer?</h2>
+
+          <div class="menu">
+            <a href="{{ url_for('listar_agendamentos') }}" class="botao-menu">
+                Agenda
+            </a>
+
+    <button type="button">Clientes</button>
+    <button type="button">Histórico de procedimentos</button>
+    <button type="button">Financeiro</button>
+</div>
+        </section>
+
+         <!-- Botão para iniciar um novo agendamento -->
+        <div class="acao-principal">
+            <a href="{{ url_for('novo_agendamento') }}" class="botao-agendamento">
+    + Novo agendamento
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Projeto Vértice — MVP em desenvolvimento</p>
+    </footer>
+</body>
+</html>

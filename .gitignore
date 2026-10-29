@@ -1,0 +1,14 @@
+
+# Ambiente virtual
+.venv/
+
+# Cache e arquivos temporários do Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Banco de dados local
+vertice.db
+
+# Configurações locais do editor
+.vscode/
