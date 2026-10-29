@@ -1,4 +1,4 @@
-
+from datetime import date
 from pathlib import Path
 import sqlite3
 
@@ -52,9 +52,16 @@ def listar_agendamentos():
             ORDER BY data, horario
         """).fetchall()
 
+    agendamentos_formatados = []
+
+    for agendamento in agendamentos:
+        item = dict(agendamento)
+        item["data"] = date.fromisoformat(item["data"]).strftime("%d/%m/%Y")
+        agendamentos_formatados.append(item)
+    
     return render_template(
         "agenda.html",
-        agendamentos=agendamentos
+        agendamentos=agendamentos_formatados
     )
 
 
