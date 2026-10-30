@@ -1,5 +1,6 @@
 from datetime import date
 from pathlib import Path
+from contextlib import contextmanager
 import sqlite3
 
 from flask import Flask, render_template, request
@@ -22,10 +23,22 @@ def conectar_banco():
     return conexao
 
 
+@contextmanager
+def banco_aberto():
+    conexao = conectar_banco()
+
+    try:
+        yield conexao
+        conexao.commit()
+    except Exception:
+        conexao.rollback()
+        raise
+    finally:
+        conexao.close()
 
 def criar_tabela():
     """Cria a tabela de agendamentos, se ainda não existir."""
-    with conectar_banco() as conexao:
+    with banco_aberto() as conexao:
         conexao.execute("""
             CREATE TABLE IF NOT EXISTS agendamentos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,7 +58,7 @@ def inicio():
 
 @app.route("/agendamentos")
 def listar_agendamentos():
-    with conectar_banco() as conexao:
+    with banco_aberto() as conexao:
         agendamentos = conexao.execute("""
             SELECT id, cliente, servico, data, horario
             FROM agendamentos
@@ -86,7 +99,7 @@ def novo_agendamento():
             if data_validada < date.today():
                 return "Erro: a data não pode estar no passado.", 400
 
-            with conectar_banco() as conexao:
+            with banco_aberto() as conexao:
                 conexao.execute("""
                     INSERT INTO agendamentos
                         (cliente, servico, data, horario)
