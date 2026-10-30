@@ -12,3 +12,7 @@ vertice.db
 
 # Configurações locais do editor
 .vscode/
+
+# Relatório temporário de cobertura
+.coverage
+htmlcov/
